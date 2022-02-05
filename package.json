@@ -1,0 +1,21 @@
+{
+  "name": "fpr-server",
+  "version": "1.0.0",
+  "description": "Backend API for a Faculty Publication Repository",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Manav Patnaik",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.2.0"
+  },
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
