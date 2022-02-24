@@ -58,19 +58,31 @@ exports.deleteFaculty = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
 	const { email, password } = req.body;
+
+	if (!email || !password)
+		return res.status(400).send({
+			success: false,
+			message: 'Please provide email and password'
+		});
+
 	const faculty = await Faculty.findOne({ email });
 	if (!faculty)
-		return res.status(404).send({
+		return res.status(401).send({
 			success: false,
-			message: 'Invalid Email'
+			message: 'Invalid Credentials'
 		});
 
 	const isPasswordValid = await faculty.matchPassword(password);
 	if (!isPasswordValid)
-		return res.status(404).send({
+		return res.status(401).send({
 			success: false,
-			message: 'Invalid Password'
+			message: 'Invalid Credentials'
 		});
 
-	res.send(faculty);
+	const token = await faculty.getSignedJwt();
+
+	res.status(200).send({
+		success: true,
+		data: token
+	});
 };
