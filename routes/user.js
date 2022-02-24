@@ -1,21 +1,22 @@
-const Faculty = require('../models/Faculty');
+const router = require('express').Router();
+const User = require('../models/User');
 
-exports.getAllFaculty = async (req, res) => {
-	const faculty = await Faculty.find(req.query);
+router.get('/', async (req, res) => {
+	const users = await User.find(req.query);
 	res.status(200).send({
 		success: true,
-		data: faculty
+		data: users
 	});
-};
+});
 
-exports.getSingleFaculty = async (req, res) => {
+router.get('/:id', async (req, res) => {
 	const { id } = req.params;
 	try {
-		const faculty = await Faculty.findById(id);
+		const user = await User.findById(id);
 		res.send({
 			success: true,
 			message: '',
-			data: faculty
+			data: user
 		});
 	} catch (err) {
 		res.send({
@@ -23,16 +24,16 @@ exports.getSingleFaculty = async (req, res) => {
 			message: err.message
 		});
 	}
-};
+});
 
-exports.createFaculty = async (req, res) => {
-	const faculty = new Faculty(req.body);
+router.post('/', async (req, res) => {
+	const user = new User(req.body);
 	try {
-		await faculty.save();
+		await user.save();
 		res.status(200).send({
 			success: true,
 			message: '',
-			data: faculty
+			data: user
 		});
 	} catch (err) {
 		res.status(400).send({
@@ -40,16 +41,16 @@ exports.createFaculty = async (req, res) => {
 			message: err.message
 		});
 	}
-};
+});
 
-exports.deleteFaculty = async (req, res) => {
+router.delete('/:id', async (req, res) => {
 	const { id } = req.params;
-	const faculty = await Faculty.deleteOne({ _id: id });
+	const user = await User.deleteOne({ _id: id });
 	try {
 		res.status(200).send({
 			success: true,
 			message: '',
-			data: faculty
+			data: user
 		});
 	} catch (err) {
 		res.status(400).send({
@@ -57,9 +58,9 @@ exports.deleteFaculty = async (req, res) => {
 			message: err.message
 		});
 	}
-};
+});
 
-exports.loginFaculty = async (req, res) => {
+router.post('/login', async (req, res) => {
 	const { email, password } = req.body;
 
 	if (!email || !password)
@@ -68,24 +69,26 @@ exports.loginFaculty = async (req, res) => {
 			message: 'Please provide email and password'
 		});
 
-	const faculty = await Faculty.findOne({ email });
-	if (!faculty)
+	const user = await User.findOne({ email });
+	if (!user)
 		return res.status(401).send({
 			success: false,
 			message: 'Invalid Credentials'
 		});
 
-	const isPasswordValid = await faculty.matchPassword(password);
+	const isPasswordValid = await user.matchPassword(password);
 	if (!isPasswordValid)
 		return res.status(401).send({
 			success: false,
 			message: 'Invalid Credentials'
 		});
 
-	const token = await faculty.getSignedJwt();
+	const token = await user.getSignedJwt();
 
 	res.status(200).send({
 		success: true,
 		data: token
 	});
-};
+});
+
+module.exports = router;

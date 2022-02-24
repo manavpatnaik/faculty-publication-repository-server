@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { loginUser, getAllFaculty, getSingleFaculty, createFaculty, deleteFaculty } = require('../controllers/faculty');
+const { getAllFaculty, getSingleFaculty, createFaculty, deleteFaculty, loginFaculty } = require('../controllers/faculty');
 
 // Get all faculty
 router.get('/', getAllFaculty);
@@ -14,6 +14,6 @@ router.post('/', createFaculty);
 router.delete('/:id', deleteFaculty);
 
 // Login user using email and password
-router.post('/login', loginUser);
+router.post('/login', loginFaculty);
 
 module.exports = router;

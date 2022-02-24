@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
 	name: {
@@ -29,29 +30,34 @@ const UserSchema = new mongoose.Schema({
 		required: [ true, 'Institution name is required' ]
 	},
 	following: {
-		type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Faculty',
-        default: []
-    }
+		type: [ mongoose.Schema.Types.ObjectId ],
+		ref: 'Faculty',
+		default: []
+	},
+	bookmarks: {
+		type: [ mongoose.Schema.Types.ObjectId ],
+		ref: 'Publication',
+		default: []
+	}
 });
 
 UserSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) {
-        next();
-    }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
-    next();
+	if (!this.isModified('password')) {
+		next();
+	}
+	const salt = await bcrypt.genSalt(10);
+	const hashedPassword = await bcrypt.hash(this.password, salt);
+	this.password = hashedPassword;
+	next();
 });
 
 UserSchema.methods.getSignedJwt = async function() {
-    return jwt.sign({ id: this._id }, process.env.JWT_SECRET);
+	return jwt.sign({ id: this._id }, process.env.JWT_SECRET);
 };
 
 UserSchema.methods.matchPassword = async function(password) {
-    const doesMatch = await bcrypt.compare(password, this.password);
-    return doesMatch;
+	const doesMatch = await bcrypt.compare(password, this.password);
+	return doesMatch;
 };
 
 const User = mongoose.model('User', UserSchema);
