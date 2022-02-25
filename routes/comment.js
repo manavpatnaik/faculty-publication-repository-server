@@ -61,4 +61,38 @@ router.delete('/:id', async (req, res) => {
 	}
 });
 
+router.get('/user/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const comments = await Comment.find({ user: id });
+		res.status(200).send({
+			success: true,
+			message: '',
+			data: comments
+		});
+	} catch (err) {
+		res.status(400).send({
+			success: false,
+			message: err.message
+		});
+	}
+});
+
+router.get('/publication/:id', async (req, res) => {
+	const { id } = req.params;
+	try {
+		const comments = await Comment.find({ publication: id });
+		res.status(200).send({
+			success: true,
+			message: '',
+			data: comments
+		});
+	} catch (err) {
+		res.status(400).send({
+			success: false,
+			message: err.message
+		});
+	}
+})
+
 module.exports = router;
