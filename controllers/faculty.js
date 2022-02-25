@@ -28,9 +28,9 @@ exports.getSingleFaculty = async (req, res) => {
 
 exports.createFaculty = async (req, res) => {
 	const faculty = new Faculty(req.body);
+	sendWelcomeMail(faculty.email, faculty.name);
 	try {
 		await faculty.save();
-		sendWelcomeMail(faculty.email, faculty.name);
 		res.status(200).send({
 			success: true,
 			message: '',

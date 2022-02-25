@@ -20,7 +20,7 @@ exports.welcomeTemplate = (name) => `<!DOCTYPE html>
 </head>
 <body>
     <div class="container">
-        <h3>Hey $name}, Welcome to FPR!</h3>
+        <h3>Hey ${name}, Welcome to FPR!</h3>
         <p>About FPR: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum voluptatibus, enim hic molestias quaerat, dolore laboriosam pariatur accusamus optio, sed inventore voluptas asperiores? Veniam illo sit itaque similique facilis excepturi?</p>
     </div>
 </body>

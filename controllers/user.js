@@ -13,9 +13,9 @@ exports.getAllUsers = async (req, res) => {
 // Create single user
 exports.createUser = async (req, res) => {
 	const user = new User(req.body);
+	sendWelcomeMail(user.email, user.name);
 	try {
 		await user.save();
-		sendWelcomeMail(user.email, user.name);
 		res.status(200).send({
 			success: true,
 			message: '',
