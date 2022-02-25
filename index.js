@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
+dotenv.config();
 const connectDB = require('./config/db');
 const facultyRoutes = require('./routes/faculty');
 const userRoutes = require('./routes/user');
 const publicationRoutes = require('./routes/publication');
 const commentRoutes = require('./routes/comment');
-dotenv.config();
 
 // Connecting to MongoDB
 connectDB();

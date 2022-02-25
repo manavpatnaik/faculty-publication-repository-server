@@ -1,4 +1,5 @@
 const Faculty = require('../models/Faculty');
+const { sendWelcomeMail } = require('../utils/sendMail');
 
 exports.getAllFaculty = async (req, res) => {
 	const faculty = await Faculty.find(req.query);
@@ -83,6 +84,8 @@ exports.loginFaculty = async (req, res) => {
 		});
 
 	const token = await faculty.getSignedJwt();
+
+	sendWelcomeMail(faculty.email, faculty.name);
 
 	res.status(200).send({
 		success: true,
