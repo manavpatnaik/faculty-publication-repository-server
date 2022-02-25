@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { sendWelcomeMail } = require('../utils/sendMail');
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
@@ -14,6 +15,7 @@ exports.createUser = async (req, res) => {
 	const user = new User(req.body);
 	try {
 		await user.save();
+		sendWelcomeMail(user.email, user.name);
 		res.status(200).send({
 			success: true,
 			message: '',

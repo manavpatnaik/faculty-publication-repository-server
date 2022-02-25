@@ -30,6 +30,7 @@ exports.createFaculty = async (req, res) => {
 	const faculty = new Faculty(req.body);
 	try {
 		await faculty.save();
+		sendWelcomeMail(faculty.email, faculty.name);
 		res.status(200).send({
 			success: true,
 			message: '',
@@ -84,8 +85,6 @@ exports.loginFaculty = async (req, res) => {
 		});
 
 	const token = await faculty.getSignedJwt();
-
-	sendWelcomeMail(faculty.email, faculty.name);
 
 	res.status(200).send({
 		success: true,
