@@ -22,17 +22,8 @@ const PublicationSchema = new mongoose.Schema(
 			trim: true,
 			minlength: [ 1, 'Publication content must contain atleast a character' ]
 		},
-		datePublished: {
-			type: Date,
-			default: Date.now
-		},
 		keywords: {
 			type: [ String ],
-			default: []
-		},
-		comments: {
-			type: [ mongoose.Schema.Types.ObjectId ],
-			ref: 'Comment',
 			default: []
 		},
 		author: {

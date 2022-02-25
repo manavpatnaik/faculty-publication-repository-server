@@ -10,6 +10,11 @@ const CommentSchema = new mongoose.Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
 			required: [ true, 'A comment must be made by a user' ]
+		},
+		publication: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Publication',
+			required: [ true, 'A comment can be made only on a publication' ]
 		}
 	},
 	{ timestamps: true }
