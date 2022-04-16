@@ -1,19 +1,29 @@
-const router = require('express').Router();
-const { getAllFaculty, getSingleFaculty, createFaculty, deleteFaculty, loginFaculty } = require('../controllers/faculty');
+const router = require("express").Router();
+const {
+  getAllFaculty,
+  getSingleFaculty,
+  createFaculty,
+  deleteFaculty,
+  loginFaculty,
+  followFaculty,
+} = require("../controllers/faculty");
 
 // Get all faculty
-router.get('/', getAllFaculty);
+router.get("/", getAllFaculty);
 
 // Get single faculty by ID
-router.get('/:id', getSingleFaculty);
+router.get("/:id", getSingleFaculty);
 
 // Create faculty
-router.post('/', createFaculty);
+router.post("/", createFaculty);
 
 // Delete Faculty using ID
-router.delete('/:id', deleteFaculty);
+router.delete("/:id", deleteFaculty);
 
 // Login user using email and password
-router.post('/login', loginFaculty);
+router.post("/login", loginFaculty);
+
+// Follow faculty using faculty id
+router.post("/follow/:id", followFaculty);
 
 module.exports = router;

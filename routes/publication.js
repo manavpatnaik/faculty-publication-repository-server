@@ -4,7 +4,8 @@ const {
 	getSinglePublication,
 	createPublication,
 	deletePublication,
-	getPublicationByFaculty
+	getPublicationByFaculty,
+	bookmarkPublication
 } = require('../controllers/publication');
 
 router.get('/', getAllPublications);
@@ -16,5 +17,7 @@ router.post('/', createPublication);
 router.delete('/:id', deletePublication);
 
 router.get('/faculty/:id', getPublicationByFaculty);
+
+router.post('/bookmark/:id', bookmarkPublication);
 
 module.exports = router;
