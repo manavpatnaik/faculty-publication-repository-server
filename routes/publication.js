@@ -1,23 +1,26 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
-	getAllPublications,
-	getSinglePublication,
-	createPublication,
-	deletePublication,
-	getPublicationByFaculty,
-	bookmarkPublication
-} = require('../controllers/publication');
+  getAllPublications,
+  getSinglePublication,
+  createPublication,
+  deletePublication,
+  getPublicationByFaculty,
+  bookmarkPublication,
+  getActivePublications,
+} = require("../controllers/publication");
 
-router.get('/', getAllPublications);
+router.get("/", getAllPublications);
 
-router.get('/:id', getSinglePublication);
+router.get("/active", getActivePublications);
 
-router.post('/', createPublication);
+router.get("/:id", getSinglePublication);
 
-router.delete('/:id', deletePublication);
+router.post("/", createPublication);
 
-router.get('/faculty/:id', getPublicationByFaculty);
+router.delete("/:id", deletePublication);
 
-router.post('/bookmark/:id', bookmarkPublication);
+router.get("/faculty/:id", getPublicationByFaculty);
+
+router.post("/bookmark/:id", bookmarkPublication);
 
 module.exports = router;

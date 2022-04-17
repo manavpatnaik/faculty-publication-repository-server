@@ -96,3 +96,8 @@ exports.bookmarkPublication = async (req, res) => {
     }
   }
 };
+
+exports.getActivePublications = async (req, res) => {
+  const activePubs = await Publication.find({archived: false});
+  return res.status(200).send({ success: true, data: activePubs });
+};

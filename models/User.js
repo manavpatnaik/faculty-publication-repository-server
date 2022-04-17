@@ -44,6 +44,11 @@ const UserSchema = new mongoose.Schema({
     enum: ["PRIVATE", "PUBLIC"],
     default: "PUBLIC",
   },
+  role: {
+    type: String,
+    enum: ["USER", "ADMIN"],
+    default: "USER"
+  }
 });
 
 UserSchema.pre("save", async function (next) {
