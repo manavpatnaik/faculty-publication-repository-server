@@ -62,6 +62,13 @@ exports.deleteFaculty = async (req, res) => {
   }
 };
 
+exports.editFaculty = async (req, res) => {
+  const { id } = req.params;
+  const updations = req.body;
+  const faculty = await Faculty.findByIdAndUpdate(id, updations);
+  return res.status(200).send({ success: true, data: faculty });
+};
+
 exports.loginFaculty = async (req, res) => {
   const { email, password } = req.body;
 

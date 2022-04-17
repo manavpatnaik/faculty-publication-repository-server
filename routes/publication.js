@@ -7,11 +7,14 @@ const {
   getPublicationByFaculty,
   bookmarkPublication,
   getActivePublications,
+  getRecentPublication,
 } = require("../controllers/publication");
 
 router.get("/", getAllPublications);
 
 router.get("/active", getActivePublications);
+
+router.get("/recent", getRecentPublication);
 
 router.get("/:id", getSinglePublication);
 

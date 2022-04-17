@@ -98,6 +98,11 @@ exports.bookmarkPublication = async (req, res) => {
 };
 
 exports.getActivePublications = async (req, res) => {
-  const activePubs = await Publication.find({archived: false});
+  const activePubs = await Publication.find({ archived: false });
   return res.status(200).send({ success: true, data: activePubs });
+};
+
+exports.getRecentPublication = async (req, res) => {
+  const publication = await Publication.find().sort({ _id: -1 }).limit(1);
+  return res.status(200).send({ success: true, data: publication });
 };

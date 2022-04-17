@@ -6,6 +6,7 @@ const {
   deleteFaculty,
   loginFaculty,
   followFaculty,
+  editFaculty,
 } = require("../controllers/faculty");
 
 // Get all faculty
@@ -25,5 +26,8 @@ router.post("/login", loginFaculty);
 
 // Follow faculty using faculty id
 router.post("/follow/:id", followFaculty);
+
+// Edit faculty details
+router.put("/:id", editFaculty);
 
 module.exports = router;
