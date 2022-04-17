@@ -2,7 +2,7 @@ const Comment = require('../models/Comment');
 
 exports.getAllComments = async (req, res) => {
 	const comments = await Comment.find(req.query);
-	res.send({
+	res.status(200).send({
 		success: true,
 		data: comments
 	});
@@ -29,13 +29,13 @@ exports.getSingleComment = async (req, res) => {
 	const { id } = req.params;
 	try {
 		const comment = await Comment.findById(id);
-		res.send({
+		res.status(200).send({
 			success: true,
 			message: '',
 			data: comment
 		});
 	} catch (err) {
-		res.send({
+		res.status(400).send({
 			success: false,
 			message: err.message
 		});

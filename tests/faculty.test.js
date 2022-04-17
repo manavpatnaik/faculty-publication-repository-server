@@ -1,4 +1,3 @@
-const { getAllFaculty, getSingleFaculty } = require("../controllers/faculty");
 const app = require("../index");
 const request = require("supertest");
 
