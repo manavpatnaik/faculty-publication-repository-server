@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 exports.getAllPublications = async (req, res) => {
   const publications = await Publication.find(req.query);
-  res.send({
+  res.status(200).send({
     success: true,
     data: publications,
   });
