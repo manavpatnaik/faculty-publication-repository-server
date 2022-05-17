@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const helmet = require("helmet");
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const cors = require("cors");
 const rateLimit = require('express-rate-limit')
-dotenv.config();
+// dotenv.config();
 const connectDB = require("./config/db");
 const facultyRoutes = require("./routes/faculty");
 const userRoutes = require("./routes/user");
