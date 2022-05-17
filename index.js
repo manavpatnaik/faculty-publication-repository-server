@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/faculty", facultyRoutes);
 app.use("/user", userRoutes);
+app.use("/admin", userRoutes);
 app.use("/publication", publicationRoutes);
 app.use("/comment", commentRoutes);
 app.use("/archive", archiveRoutes);
@@ -32,6 +33,6 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 
 module.exports = app;
